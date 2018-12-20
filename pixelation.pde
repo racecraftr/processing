@@ -1,0 +1,23 @@
+float x, y;
+float s;
+void setup() {
+  size(600, 600);
+  s = 25;
+  background(20);
+  frameRate(300);
+}
+void draw() {
+  //background(20);
+  stroke(20);
+  noStroke();
+  for (int i = 0; i<600; i++) {
+    x = floor(random(width/s));
+    y = floor(random(height/s));
+    if (0 > tan(y) && 0 > tan(x)) {
+      fill(x*5, 255 - mouseX/300 * 128 + random(20,100), y*6);
+    } else {
+      fill((255 - (mouseY/300) * 128) + random(20,100), x*5, y*6);
+    }
+    rect(x*s, y*s, (s/1), s);
+  }
+}
