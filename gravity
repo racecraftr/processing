@@ -1,15 +1,20 @@
-// gravity program
-float x, y, r; 
-float speed, gravity = 0.1, xc;
-float h;
+// gravity program...!
 
+float x, y, r; 
+float speed, gravity = 0.1, xc;// declares changes in location
+float h;// for color...
+
+// set up program
 void setup() {
   size(600, 600);
   ellipseMode(CENTER);
+  
+  // helps create rainbow effect
   colorMode(HSB, 360, 100, 100);
   background(0, 0, (100/255) * 20);
   frameRate(100);
   
+  // init. variables
   x = width/2;
   y = 0;
   r = 20;
@@ -17,22 +22,34 @@ void setup() {
   h = 0;
 }
 
+// draws it out
 void draw() {
   background(20);
   fill(h, 100, 100);
   noStroke();
   ellipse(x, y, r*2, r*2);
+  
+  // change y
    y = y + speed;
    
+   // change x
    x = x + xc;
+   
+   // || means OR. We use OR because that way, we can set it to either edge. 
    if(x > width - r || x < r){
      xc = xc*-1;
    }
+   
+   // increases the change of y
    speed = speed + gravity;
    if(y > height - r){
+   
+     // by 0.99 so that the jump peak goes down slightly every bounce
      speed = speed * -0.99;
    }
    
+   // increases the hue and makes it go back from the highest hue to the lowest
+   // which are the same color (RED)
    h++;
    if(h > 360){
      h = 0;
