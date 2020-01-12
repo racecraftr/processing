@@ -1,0 +1,28 @@
+float r;
+float theta;
+float h;
+void setup() {
+  size(600, 600);
+  r = height * .6;
+  h = 0;
+  theta = 0;
+  background(255);
+  frameRate(1000);
+  pixelDensity(2);
+}
+void draw() {
+  for(int i = 0; i < 5; i++){
+    pushMatrix();
+    translate(width/2, height/2);
+    strokeWeight(5);
+    float x = r*sin(theta);
+    float y = r*cos(theta) ;
+    stroke(x, y, 255);
+    line(x, y, r*sin(theta+.5), r*cos(theta + .5));
+    stroke(x, 255, y);
+    line(x, y, r*sin(theta+.1), r*cos(theta + .1));
+    theta+=.001;
+    r =width/2*sin(2*theta);
+    popMatrix();
+  }
+}
