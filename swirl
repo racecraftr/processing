@@ -1,0 +1,30 @@
+float t;
+void setup() {
+  size(600, 600);
+  background(20);
+  strokeWeight(4);
+  pixelDensity(2);
+  t = 0;
+  frameRate(1000);
+}
+float x(float t) {
+  return sin(t/10)* (t/10);
+}
+float y(float t) {
+  return cos(t/10) * (t/30);
+}
+void draw() {
+  //background(20);
+  for(int i = 0; i < 10; i++){
+     stroke(y(t*2), x(t), 255);
+     strokeWeight(5);
+     pushMatrix();
+     translate(width/2, height/2);
+     rotate(t);
+     line (x(t), y(t), x(t+1), y(t+1));
+  //point(x(t), y(t));
+  //point(y(t), x(t));
+  popMatrix();
+  t++; 
+  }
+}
