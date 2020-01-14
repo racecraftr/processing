@@ -1,0 +1,46 @@
+size(600, 600);
+background(0);
+colorMode(HSB, 360, 100, 100);
+float w = 4;
+float h = (w*height)/width;
+float xmin = (-w/2);
+float ymin = (-h/2);
+pixelDensity(1);
+loadPixels();
+float cx = -0.2182239478957917 ;
+float cy =  0.666119739478958 ;
+long  maxiter = 100000L;
+float xmax = xmin + w;
+float ymax = ymin + h;
+float dx = (xmax - xmin)/(width);
+float dy = (ymax - ymin)/(height);
+//equation: z = z^2 + c
+float y = ymin;
+for(int j = 0; j < height; j++) {
+  float x = xmin;
+  for (int i = 0; i < width; i++) {
+    float a = x;
+    float b = y;
+    int n = 0;
+    while(n < maxiter) {
+      float aa =(a * a);//z^2
+      float bb =(b*b);//z^2
+      float twoab = 2.0 * (a * b);
+      a = (aa - bb + cx);
+      b = (twoab + cy);
+      if (dist(aa, bb, 0, 0)>4.0){
+        break;
+      }
+      n++;
+    }
+    if (n == maxiter) {
+      pixels[i+j*width] = color(0);
+    }else{
+      float norm = map(n, 0, maxiter, 0, 1);
+      pixels[i+j * width] = color(map(sqrt(norm), 0, 1, n, 255), 100, 100);
+    }
+    x+= dx;
+  }
+  y +=dy;
+}
+updatePixels();
